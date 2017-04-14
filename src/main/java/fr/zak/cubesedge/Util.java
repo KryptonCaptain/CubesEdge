@@ -22,7 +22,7 @@ public class Util {
 	private static List<Movement> movements = new ArrayList<Movement>();
 	private static List<MovementClient> clientsMovements = new ArrayList<MovementClient>();
 
-	public static Configuration cfg;
+	//public static Configuration cfg;
 
 	public static boolean obfuscation;
 
@@ -67,7 +67,7 @@ public class Util {
 	}
 
 	public static void registerMovement(Movement target) {
-		Property prop = cfg.get("movements", target.getName(), true);
+		Property prop = Config.config.get("movements", target.getName(), true);
 		if (!prop.getBoolean(true)) {
 			target.disable();
 		}
@@ -87,7 +87,7 @@ public class Util {
 	}
 
 	public static void registerClientMovement(MovementClient target) {
-		Property prop = cfg.get("cmimovements", target.getName(), true);
+		Property prop = Config.config.get("cmimovements", target.getName(), true);
 		//		if (!prop.getBoolean(true)) {
 		//			target.disable();
 		//		}

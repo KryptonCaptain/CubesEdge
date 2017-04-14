@@ -8,6 +8,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import fr.zak.cubesedge.Config;
 import fr.zak.cubesedge.MovementClient;
 import fr.zak.cubesedge.entity.EntityPlayerCustom;
 
@@ -20,58 +21,65 @@ public class MovementSprintClient extends MovementClient {
 	private static double prevPosZ;
 	private Minecraft mc;
 
+	//TODO HUD
 	@SubscribeEvent
 	public void onRenderInGame(RenderGameOverlayEvent.Post event) {
-		if (mc == null)
-			mc = Minecraft.getMinecraft();
-		calculateSpeed();
-		if (event.type == RenderGameOverlayEvent.ElementType.ALL) {
-			this.drawString(
-				mc.fontRenderer,
-				"Speed : ",
-				event.resolution.getScaledWidth() - 115,
-				event.resolution.getScaledHeight() - 15,
-				new Color(255, 255, 255).getRGB()
-			);
-			
-			this.drawString(
-				mc.fontRenderer,
-				speedToStr(),
-				event.resolution.getScaledWidth() - 45 - mc.fontRenderer.getStringWidth(speedToStr()),
-				event.resolution.getScaledHeight() - 15,
-				new Color(255, 255, 255).getRGB()
-			);
-			
-			this.drawString(
-				mc.fontRenderer,
-				"kb/h",
-				event.resolution.getScaledWidth() - 40,
-				event.resolution.getScaledHeight() - 15,
-				new Color(255, 255, 255).getRGB()
-			);
+		if(Config.showSpeedometer) {
+			if (mc == null)
+				mc = Minecraft.getMinecraft();
+			calculateSpeed();
+			if (event.type == RenderGameOverlayEvent.ElementType.ALL) {
+				this.drawString(
+					mc.fontRenderer,
+					"Speed : ",
+					event.resolution.getScaledWidth() - 115,
+					event.resolution.getScaledHeight() - 15,
+					new Color(255, 255, 255).getRGB()
+				);
+				
+				this.drawString(
+					mc.fontRenderer,
+					speedToStr(),
+					event.resolution.getScaledWidth() - 45 - mc.fontRenderer.getStringWidth(speedToStr()),
+					event.resolution.getScaledHeight() - 15,
+					new Color(255, 255, 255).getRGB()
+				);
+				
+				this.drawString(
+					mc.fontRenderer,
+					"kb/h",
+					event.resolution.getScaledWidth() - 40,
+					event.resolution.getScaledHeight() - 15,
+					new Color(255, 255, 255).getRGB()
+				);
+			}
 		}
 	}
 
-	public void drawString(FontRenderer par1FontRenderer, String par2Str,
-			int par3, int par4, int par5) {
-		par1FontRenderer.drawStringWithShadow(par2Str, par3, par4, par5);
+	public void drawString(FontRenderer par1FontRenderer, String par2Str, int par3, int par4, int par5) {
+		if(Config.showSpeedometer) {
+			par1FontRenderer.drawStringWithShadow(par2Str, par3, par4, par5);
+		}
 	}
 
 	public static String speedToStr()
 	{
-		if (speed <= 0)
-			return "0";
-		String str = "" + round((float)speed, 2);
-		String[] tab = str.split("\\.");
-		if (tab.length > 1)
-		{
-			while (tab[1].length() < 2)
+		if(Config.showSpeedometer) {
+			if (speed <= 0)
+				return "0";
+			String str = "" + round((float)speed, 2);
+			String[] tab = str.split("\\.");
+			if (tab.length > 1)
 			{
-				str += "0";
-				tab = str.split("\\.");
+				while (tab[1].length() < 2)
+				{
+					str += "0";
+					tab = str.split("\\.");
+				}
 			}
+			return str;
 		}
-		return str;
+		return null;
 	}
 
 	private void calculateSpeed()
@@ -86,10 +94,12 @@ public class MovementSprintClient extends MovementClient {
 		bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
 		return bd.floatValue();
 	}
+	
 
+	//TODO end
 	@Override
 	public void renderTick(EntityPlayerCustom playerCustom) {
-
+		/*
 		float f1 = playerCustom.slow ? 0.03F / 4F : 0.03F;
 		if (!playerCustom.animLeft && !playerCustom.animRight) {
 			if (Minecraft.getMinecraft().thePlayer.isSprinting()) {
@@ -142,8 +152,9 @@ public class MovementSprintClient extends MovementClient {
 			playerCustom.tickRunningLeft = 0;
 			playerCustom.tickRunningRight = 0;
 		}
-
+		*/
 	}
+	
 
 	@Override
 	public String getName() {

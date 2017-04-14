@@ -45,7 +45,7 @@ public class MovementRoll extends Movement {
 				if (playerCustom.rotationPitch == 0) {
 					playerCustom.rotationPitch = player.rotationPitch;
 				}
-				playerCustom.rotationPitch += 30;
+				playerCustom.rotationPitch += 30; //TODO roll angle incrementer
 				float f2 = player.rotationPitch;
 				if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
 					player.rotationPitch = (float) ((double) playerCustom.rotationPitch);
@@ -84,8 +84,8 @@ public class MovementRoll extends Movement {
 		}
 		if (event.entityLiving instanceof EntityPlayer && roll) {
 			ticks++;
-			System.out.println("1 : " + ((EntityPlayerCustom)event.entityLiving.getExtendedProperties("Cube's Edge Player")).isRolling);
-			System.out.println("2 : " + ((EntityPlayerCustom)event.entityLiving.getExtendedProperties("Cube's Edge Player")).prevRolling);
+			//System.out.println("1 : " + ((EntityPlayerCustom)event.entityLiving.getExtendedProperties("Cube's Edge Player")).isRolling);
+			//System.out.println("2 : " + ((EntityPlayerCustom)event.entityLiving.getExtendedProperties("Cube's Edge Player")).prevRolling);
 			event.distance = 0;
 		}
 		if(ticks >= 2){

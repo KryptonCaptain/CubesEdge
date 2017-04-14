@@ -19,7 +19,7 @@ public class MovementSprint extends Movement {
 	public void walk(LivingUpdateEvent event) {
 		if (event.entityLiving instanceof EntityPlayer
 				&& event.entityLiving != null) {
-			if (((EntityPlayer) event.entityLiving).isSprinting()) {
+			if (((EntityPlayer) event.entityLiving).isSprinting() && !((EntityPlayer)event.entityLiving).isInWater()) {
 				if (speed < 1.15) {
 					speed += 0.005F;
 				}

@@ -24,6 +24,7 @@ import cpw.mods.fml.common.eventhandler.IEventListener;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fr.zak.cubesedge.Config;
 import fr.zak.cubesedge.Movement;
 import fr.zak.cubesedge.Util;
 
@@ -122,11 +123,11 @@ public class GuiMovementList extends GuiListExtended {
 					p_148278_2_, p_148278_3_)) {
 				if (this.movement.isMovementDisabled()) {
 					this.movement.enable();
-					Property prop = Util.cfg.get("movements", this.movement.getName(),
+					Property prop = Config.config.get("movements", this.movement.getName(),
 							true);
 					prop.set(true);
-					if (Util.cfg.hasChanged()) {
-						Util.cfg.save();
+					if (Config.config.hasChanged()) {
+						Config.config.save();
 					}
 					for (Method m : movement.getClass().getDeclaredMethods()) {
 						if (m.isAnnotationPresent(SubscribeEvent.class)) {
@@ -174,12 +175,12 @@ public class GuiMovementList extends GuiListExtended {
 					}
 				} else {
 					this.movement.disable();
-					Property prop = Util.cfg.get("movements", this.movement
+					Property prop = Config.config.get("movements", this.movement
 							.getName(),
 							true);
 					prop.set(false);
-					if (Util.cfg.hasChanged()) {
-						Util.cfg.save();
+					if (Config.config.hasChanged()) {
+						Config.config.save();
 					}
 					for (Method m : movement.getClass().getDeclaredMethods()) {
 						if (m.isAnnotationPresent(SubscribeEvent.class)) {

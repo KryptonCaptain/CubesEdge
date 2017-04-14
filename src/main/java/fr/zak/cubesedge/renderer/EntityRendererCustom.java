@@ -18,7 +18,7 @@ public class EntityRendererCustom extends EntityRenderer {
 	public EntityRendererCustom(Minecraft mc) {
 		super(mc, mc.getResourceManager());
 		this.mc = mc;
-		System.out.println("fefw");
+		//System.out.println("fefw");
 	}
 
 	@Override

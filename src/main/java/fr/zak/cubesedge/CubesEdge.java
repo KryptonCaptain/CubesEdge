@@ -35,7 +35,7 @@ import fr.zak.cubesedge.ticks.PlayerTickHandler;
  * @author Zak (alex.ulysse@gmail.com)
  * 
  */
-@Mod(modid = "cubesedge", name = "Cube's Edge", version = Util.VERSION, guiFactory = "fr.zak.cubesedge.GuiFactory")
+@Mod(modid = "CubesEdge", name = "Cube's Edge", version = Util.VERSION, guiFactory = "fr.zak.cubesedge.GuiFactory")
 public class CubesEdge {
 
 	@SidedProxy(clientSide = "fr.zak.cubesedge.proxys.ClientProxy", serverSide = "fr.zak.cubesedge.proxys.CommonProxy")
@@ -43,9 +43,13 @@ public class CubesEdge {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		/*
 		Util.cfg = new Configuration(new File(Loader.instance().getConfigDir(),
-				"cube's edge.cfg"));
+				"CubesEdge.cfg"));
 		Util.cfg.load();
+		*/
+		Config.loadConfig(event);
+		
 		Util.detectObfuscation();
 		MinecraftForge.EVENT_BUS.register(new ConstructEvent());
 	}
@@ -69,6 +73,10 @@ public class CubesEdge {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		
+		Config.checkMods();
+		
+		
 		Iterator<Block> i = Block.blockRegistry.iterator();
 		while (i.hasNext()) {
 			Block block = i.next();

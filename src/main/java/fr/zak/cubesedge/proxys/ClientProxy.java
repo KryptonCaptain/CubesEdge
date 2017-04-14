@@ -2,6 +2,7 @@ package fr.zak.cubesedge.proxys;
 
 import net.minecraft.client.Minecraft;
 import cpw.mods.fml.common.FMLCommonHandler;
+import fr.zak.cubesedge.Config;
 import fr.zak.cubesedge.Util;
 import fr.zak.cubesedge.movement.client.MovementRollClient;
 import fr.zak.cubesedge.movement.client.MovementSlideClient;
@@ -16,7 +17,11 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderThings() {
 		FMLCommonHandler.instance().bus().register(new RenderTickHandler());
-		Util.registerClientMovement(new MovementSlowClient());
+		
+		if (Config.allowSlow) {
+			Util.registerClientMovement(new MovementSlowClient());
+		}
+		
 		Util.registerClientMovement(new MovementRollClient());
 		Util.registerClientMovement(new MovementSlideClient());
 		Util.registerClientMovement(new MovementSprintClient());

@@ -24,11 +24,11 @@ public class MovementSlide extends Movement {
 					playerCustom.isSneaking = true;
 				}
 			}
-			if (playerCustom.isSneaking && player.isSneaking()) {
+			if (playerCustom.isSneaking && player.isSneaking() && !player.isInWater()) {
 				if (player.isCollidedHorizontally) {
-					playerCustom.sneakTime = 16;
+					playerCustom.sneakTime = 10;
 				}
-				if (playerCustom.sneakTime < 16 && player.onGround) {
+				if (playerCustom.sneakTime < 10 && player.onGround) {
 					player.motionX *= (0.98F * 0.91F) + 1;
 					player.motionZ *= (0.98F * 0.91F) + 1;
 					playerCustom.sneakTime++;
@@ -44,7 +44,7 @@ public class MovementSlide extends Movement {
 				.getBlock(
 						x, y, z)) && playerCustom.wasSliding)){
 			Util.forceSetSize(Entity.class, player,
-					0.6F, 0.6F);
+					0.6F, 0.6F); //0.6, 0.6
 		}
 		else {
 			Util.forceSetSize(Entity.class, player,

@@ -37,6 +37,7 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fr.zak.cubesedge.Config;
 import fr.zak.cubesedge.Util;
 import fr.zak.cubesedge.entity.EntityPlayerCustom;
 
@@ -771,7 +772,11 @@ public class Patch {
 			renderplayer.modelBipedMain.onGround = 0.0F;
 			renderplayer.modelBipedMain.setRotationAngles(0.0F, 0.0F, 0.0F,
 					0.0F, 0.0F, 0.0625F, Minecraft.getMinecraft().thePlayer);
-			renderplayer.modelBipedMain.bipedLeftArm.render(0.0625F);
+			if (!Config.loaded_Battlegear && Config.renderLeftHand) {
+				renderplayer.modelBipedMain.bipedLeftArm.render(0.0625F);
+				//TODO test
+			}
+			
 			GL11.glPopMatrix();
 		}
 
