@@ -24,7 +24,7 @@ public class MovementSprintClient extends MovementClient {
 	//TODO HUD
 	@SubscribeEvent
 	public void onRenderInGame(RenderGameOverlayEvent.Post event) {
-		if(Config.showSpeedometer) {
+		if(Config.renderSpeedometer) {
 			if (mc == null)
 				mc = Minecraft.getMinecraft();
 			calculateSpeed();
@@ -57,14 +57,14 @@ public class MovementSprintClient extends MovementClient {
 	}
 
 	public void drawString(FontRenderer par1FontRenderer, String par2Str, int par3, int par4, int par5) {
-		if(Config.showSpeedometer) {
+		if(Config.renderSpeedometer) {
 			par1FontRenderer.drawStringWithShadow(par2Str, par3, par4, par5);
 		}
 	}
 
 	public static String speedToStr()
 	{
-		if(Config.showSpeedometer) {
+		if(Config.renderSpeedometer) {
 			if (speed <= 0)
 				return "0";
 			String str = "" + round((float)speed, 2);

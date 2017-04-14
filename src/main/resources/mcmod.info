@@ -2,7 +2,7 @@
 {
   "modid": "cubesedge",
   "name": "Cube's Edge",
-  "description": "I like Mirror's Edge",
+  "description": "Adding Mirror's Edge style movement to Minecraft",
   "version": "${version}",
   "mcversion": "1.7.10",
   "url": "",

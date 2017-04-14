@@ -18,7 +18,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerRenderThings() {
 		FMLCommonHandler.instance().bus().register(new RenderTickHandler());
 		
-		if (Config.allowSlow) {
+		if (Config.movementSlow) {
 			Util.registerClientMovement(new MovementSlowClient());
 		}
 		
