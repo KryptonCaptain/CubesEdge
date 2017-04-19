@@ -28,7 +28,7 @@ public class Util {
 
 	public static SimpleNetworkWrapper channel;
 
-	public static final String VERSION = "Alpha 0.2.0";
+	public static final String VERSION = "${version}";
 
 	public static List<Block> cubes = new ArrayList<Block>();
 

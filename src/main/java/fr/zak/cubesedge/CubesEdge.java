@@ -35,7 +35,7 @@ import fr.zak.cubesedge.ticks.PlayerTickHandler;
  * @author Zak (alex.ulysse@gmail.com)
  * 
  */
-@Mod(modid = "CubesEdge", name = "Cube's Edge", version = Util.VERSION, guiFactory = "fr.zak.cubesedge.GuiFactory")
+@Mod(modid = "CubesEdge", name = "Cube's Edge", version = Util.VERSION, guiFactory = "fr.zak.cubesedge.GuiFactory"/*, dependencies="after:AppleCore"*/)
 public class CubesEdge {
 
 	@SidedProxy(clientSide = "fr.zak.cubesedge.proxys.ClientProxy", serverSide = "fr.zak.cubesedge.proxys.CommonProxy")

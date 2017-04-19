@@ -7,6 +7,7 @@ import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.InsnNode;
@@ -42,7 +43,9 @@ public class ItemRendererTransformer implements IClassTransformer {
 					patchRenderHandMethod(mn);
 				}
 			}
-			ClassWriter cw = new ClassWriter(0);
+			ClassWriter cw = new ClassWriter(0); //orig code
+			//ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES); //squeek code
+			
 			cn.accept(cw);
 			System.out
 					.println("Cube\'s Edge Core - Patching class ItemRenderer done.");
@@ -66,6 +69,19 @@ public class ItemRendererTransformer implements IClassTransformer {
 				"renderItemInFirstPerson", "(L" + className + ";F)V", false));
 		newList.add(new InsnNode(Opcodes.RETURN));
 
-		mn.instructions = newList;
+		//mn.instructions = newList; //orig code
+		mn.instructions.insertBefore(findFirstInstruction(mn), newList); //squeek recommended code
 	}
+	
+	//squeek code
+	private static AbstractInsnNode findFirstInstruction(MethodNode method)
+	{
+		for (AbstractInsnNode instruction = method.instructions.getFirst(); instruction != null; instruction = instruction.getNext())
+		{
+			if (instruction.getType() != AbstractInsnNode.LABEL && instruction.getType() != AbstractInsnNode.LINE)
+				return instruction;
+		}
+		return null;
+	}
+	
 }
