@@ -24,7 +24,7 @@ public class Config {
 		config.load();
 		
 		renderLeftHand = config.get("Render", "Render left hand", true, 
-				"Renders the left hand you are not holding anything. Will be automatically disabled if Battlegear is installed due to weirdness.")
+				"Renders the left hand if you are not holding anything. Will be automatically disabled if Battlegear is installed due to weirdness.")
 				.getBoolean(true);
 		
 		renderSpeedometer = config.get("Render", "Show speed HUD", true, 
